@@ -33,19 +33,15 @@ function searchInfo(event) {
 // USAR DOM EN EL HTML DE ESTA FUNCIÓN
 function renderSerie(oneSerie) {
   let html = '';
-  html += `<div class ="" id="">`;
-  html += '<h2>';
-  html += oneSerie.show.name;
-  html += '</h2>';
-  html += '<div>';
+  html += `<h2>${oneSerie.show.name}</h2>`;
+  html += `<ul id= ${oneSerie.show.id} class="js-ul-list">`;
   if (oneSerie.show.image) {
     html += `<img src="${oneSerie.show.image.original}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/>`;
   } else {
     html += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
         text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/>`;
   }
-  html += '</div>';
-  html += '</div>';
+  html += `</ul>`;
   return html;
 }
 
@@ -67,6 +63,7 @@ function renderSerieList(listSeries) {
 }
 
 //Añadir series FAV Usar DOM???
+// const allSeries = document.querySelectorAll('.js-ul-list');
 
 //Pintar FAV
 function renderFav(oneSerie) {
@@ -89,15 +86,20 @@ function renderFav(oneSerie) {
   return html;
 }
 
-function handleFav() {
-  let html = '';
-  for (let index = 0; index < fav.length; index += 1) {
-    html += renderFav(fav[index]);
-  }
-  favorites.innerHTML = html;
-}
+// function handleFav() {
+//   let html = '';
+//   for (let index = 0; index < fav.length; index += 1) {
+//     html += renderFav(fav[index]);
+//   }
+//   favorites.innerHTML = html;
+// }
 
-handleFav();
+// handleFav();
 
 // EVENTOS
 btn.addEventListener('click', searchInfo);
+
+/*evento click sobre la tarjeta de la serie, asociar un evento click a cada 
+una de las tarjetas series. querySelectorAll a las ul, luego bucle sobre cada paleta y le añado el evento click
+con eventTarget obtengo a la que le di click
+de aquí obtengo el id y lo añado dentro del ul*/
