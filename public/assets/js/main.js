@@ -4,6 +4,7 @@
 const favorites = document.querySelector('.js-favorites');
 const btn = document.querySelector('.js-btn');
 const seriesContainer = document.querySelector('.js-container');
+const msgError = document.querySelector('.js-msg-error');
 
 //VARIABLES
 let series = [];
@@ -18,9 +19,13 @@ function searchInfo(event) {
   fetch(`https://api.tvmaze.com/search/shows?q=${inputText}`)
     .then((reponse) => reponse.json())
     .then((dataApi) => {
-      series += dataApi;
-      //función que pinta el listado
-      renderSerieList(dataApi);
+      series = dataApi;
+      if (inputText === '') {
+        msgError.innerHTML = 'Esa serie no la he visto 👀';
+      } else {
+        msgError.innerHTML = '';
+        renderSerieList(dataApi);
+      }
     });
 }
 
@@ -45,7 +50,17 @@ function renderSerie(oneSerie) {
 }
 
 //Funcion renderSerieList para pintar una serie en el HTML
+// function renderSerieList(listSeries) {
+//   for (const oneSerie of listSeries) {
+//     seriesContainer.innerHTML += renderSerie(oneSerie);
+//   }
+// }
+
 function renderSerieList(listSeries) {
+  // if (inputText === '') {
+  //   msgError.innerHTML = 'Esa serie no la he visto 👀';
+  // } else {
+  seriesContainer.innerHTML = '';
   for (const oneSerie of listSeries) {
     seriesContainer.innerHTML += renderSerie(oneSerie);
   }
