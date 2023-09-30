@@ -19,7 +19,7 @@ function searchInfo(event) {
   fetch(`https://api.tvmaze.com/search/shows?q=${inputText}`)
     .then((reponse) => reponse.json())
     .then((dataApi) => {
-      series = dataApi.series;
+      series = dataApi;
       if (inputText === '') {
         msgError.innerHTML = 'Esa serie no la he visto 👀';
       } else {
@@ -34,13 +34,14 @@ function searchInfo(event) {
 function renderSerie(oneSerie) {
   let html = '';
   html += `<h2>${oneSerie.show.name}</h2>`;
-  html += `<ul id= ${oneSerie.show.id} class="js-ul-item">`;
+  html += `<ul id= ${oneSerie.show.id} class="js-ulElements">`;
   if (oneSerie.show.image) {
-    html += `<img src="${oneSerie.show.image.original}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}"/>`;
+    html += `<li class="js-liElements"><img src="${oneSerie.show.image.original}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}"/></li>`;
   } else {
-    html += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
-        text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/>`;
+    html += `<li class="js-liElements"><img src="https://via.placeholder.com/210x295/ffffff/666666/?
+          text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/></li>`;
   }
+
   html += `</ul>`;
   return html;
 }
@@ -50,62 +51,29 @@ function renderSerieList(listSeries) {
   for (const oneSerie of listSeries) {
     seriesContainer.innerHTML += renderSerie(oneSerie);
   }
+
   // lo pinto aquí porque antes no tiene sentido pintarlo porque no existe, vacío
-  addEventsToSeries();
+  addEventsToSerie();
 }
 
-function handleClick(event) {
-  const idSerieClick = event.currentTarget.id;
-  const foundSerie = series.find((item) => (item.id = idSerieClick));
-  console.log(foundSerie);
+// AÑADIR SERIES FAVORITAS
+function handleClickId(event) {
+  const idSerieClick = parseInt(event.currentTarget.id); //porque estoy comparando string con número en id, se pasa a número con número
+  console.log(idSerieClick);
+  const foundSerie = series.find((oneSerie) => (oneSerie.show.id = idSerieClick)
+  );
 }
-
-function addEventsToSeries() {
-  const allSeries = document.querySelectorAll('.js-ul-item');
-  for (const item of allSeries) {
-    item.addEventListener('click', handleClick);
-  }
-}
-
-//Añadir series FAV Usar DOM???
-
-//Pintar FAV
-// function renderFav(oneSerie) {
-//   let html = '';
-//   html += `<article class="js-container-fav" id="${oneSerie.show.id}">`;
-//   html += '<section>';
-//   html += oneSerie.show.name;
-//   html += '</section>';
-//   html += `<article>`;
-//   html += '<div>';
-//   if (oneSerie.show.image) {
-//     html += `<img src="${oneSerie.show.image.original}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}"/>`;
-//   } else {
-//     html += `<img src="https://via.placeholder.com/210x295/ffffff/666666/?
-//           text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}"/>`;
-//   }
-//   html += '</div>';
-//   html += '</article>';
-//   html += '</article>';
-//   return html;
-// }
-
-// function handleFav() {
-//   let html = '';
-//   for (let index = 0; index < fav.length; index += 1) {
-//     html += renderFav(fav[index]);
-//   }
-//   favorites.innerHTML = html;
-// }
-
-// handleFav();
 
 // EVENTOS
+
+function addEventsToSerie() {
+  const allSeries = document.querySelectorAll('.js-ulElements');
+  console.log(allSeries);
+  for (const oneSerie of allSeries) {
+    oneSerie.addEventListener('click', handleClickId);
+  }
+}
 btn.addEventListener('click', searchInfo);
 
-/*evento click sobre la tarjeta de la serie, asociar un evento click a cada 
-una de las tarjetas series. querySelectorAll a las ul, luego bucle sobre cada paleta y le añado el evento click
-con eventTarget obtengo a la que le di click
-de aquí obtengo el id y lo añado dentro del ul*/
 
 //# sourceMappingURL=main.js.map
