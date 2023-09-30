@@ -46,20 +46,55 @@ function searchInfo(event) {
 
 //Función para pintar UNA serie en el HTML, renderSerie
 // USAR DOM EN EL HTML DE ESTA FUNCIÓN
+
 function renderSerie(oneSerie) {
   let html = '';
-  html += `<h2>${oneSerie.show.name}</h2>`;
+  html += `<h2 class="serie__title">${oneSerie.show.name}</h2>`;
   html += `<ul id= ${oneSerie.show.id} class="js-ulElements">`;
   if (oneSerie.show.image) {
     html += `<li class="js-liElements"><img src="${oneSerie.show.image.original}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}"/></li>`;
   } else {
     html += `<li class="js-liElements"><img src="https://via.placeholder.com/210x295/ffffff/666666/?
-          text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/></li>`;
+           text=TV" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" class=""/></li>`;
   }
 
   html += `</ul>`;
   return html;
 }
+// FUNCIÓN ANTERIOR CON DOM
+// function renderSerie(oneSerie) {
+//   let html = '';
+
+//   const h2Title = document.createElement('h2');
+//   h2Title.classList.add('serie__title');
+//   h2Title.textContent = oneSerie.show.name;
+
+//   const ulElement = document.createElement('ul');
+//   ulElement.id = oneSerie.show.id;
+//   ulElement.classList.add('js-ulElements');
+//   ulElement.appendChild(liElement);
+
+//   const liElement = document.createElement('li');
+//   liElements.classList.add('js-liElements');
+//   liElement.appendChild(imgElement);
+
+//   const imgElement = document.createElement('img');
+//   imgElement.alt = oneSerie.show.name;
+//   imgElement.title = oneSerie.show.name;
+
+//   if (oneSerie.show.image) {
+//     imgElement.src = oneSerie.show.image.original;
+//   } else {
+//     imgElement.src =
+//       'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
+//     imgElement.classList.add('js-liElements-img');
+//   }
+
+//   html.appendChild(h2Title);
+//   html.appendChild(ulElement);
+
+//   return html;
+// }
 
 function renderSerieList(listSeries) {
   seriesContainer.innerHTML = '';
@@ -95,15 +130,15 @@ function handleClickId(event) {
     // si está lo quito
     fav.splice(serieFav, 1);
   }
+  renderSeriesFav(fav);
 
   localStorage.setItem('fav', JSON.stringify(fav));
   if (serieLocalStorage !== null) {
     series = serieLocalStorage;
-    renderSerieList(series);
+    renderSeriesFav(fav);
   } else {
     searchInfo();
   }
-  renderSeriesFav(fav);
 }
 
 // EVENTOS

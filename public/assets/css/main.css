@@ -1,3 +1,17 @@
+.h1__title {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #77dd77;
+  text-align: center;
+  padding: 20px; }
+
+.main {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around; }
+  .main .serie__title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #84b6f4; }
+
 img {
   width: 150px; }
 
