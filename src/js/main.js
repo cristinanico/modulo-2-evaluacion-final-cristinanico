@@ -10,6 +10,8 @@ const msgError = document.querySelector('.js-msg-error');
 let series = [];
 let fav = [];
 
+const serieLocalStorage = JSON.parse(localStorage.getItem('fav'));
+
 // FUNCIONES
 
 //El fetch tiene que pintar una serie en el HTML
@@ -28,6 +30,19 @@ function searchInfo(event) {
       }
     });
 }
+
+// function saveInfoFromLocalStorage() {
+// }
+
+// function getInfoFromLocalStorage() {
+//   const result = JSON.parse(localStorage.getItem('fav'));
+//   if (result === null) {
+//     return [];
+//   } else {
+//     fav = result;
+//     return fav;
+//   }
+// }
 
 //Función para pintar UNA serie en el HTML, renderSerie
 // USAR DOM EN EL HTML DE ESTA FUNCIÓN
@@ -79,6 +94,14 @@ function handleClickId(event) {
   } else {
     // si está lo quito
     fav.splice(serieFav, 1);
+  }
+
+  localStorage.setItem('fav', JSON.stringify(fav));
+  if (serieLocalStorage !== null) {
+    series = serieLocalStorage;
+    renderSerieList(series);
+  } else {
+    searchInfo();
   }
   renderSeriesFav(fav);
 }
