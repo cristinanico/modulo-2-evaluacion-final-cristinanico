@@ -56,24 +56,41 @@ function renderSerieList(listSeries) {
   addEventsToSerie();
 }
 
+function renderSeriesFav(favSeries) {
+  favorites.innerHTML = '';
+  for (const oneSerie of favSeries) {
+    favorites.innerHTML += renderSerie(oneSerie);
+  }
+}
+
 // AÑADIR SERIES FAVORITAS
 function handleClickId(event) {
   const idSerieClick = parseInt(event.currentTarget.id); //porque estoy comparando string con número en id, se pasa a número con número
-  console.log(idSerieClick);
-  const foundSerie = series.find((oneSerie) => (oneSerie.show.id = idSerieClick)
+  const foundSerie = series.find(
+    (oneSerie) => oneSerie.show.id === idSerieClick
   );
+
+  const serieFav = fav.findIndex(
+    (oneSerie) => oneSerie.show.id === idSerieClick
+  );
+  //si no está lo añado
+  if (serieFav === -1) {
+    fav.push(foundSerie);
+  } else {
+    // si está lo quito
+    fav.splice(serieFav, 1);
+  }
+  renderSeriesFav(fav);
 }
 
 // EVENTOS
 
 function addEventsToSerie() {
   const allSeries = document.querySelectorAll('.js-ulElements');
-  console.log(allSeries);
   for (const oneSerie of allSeries) {
     oneSerie.addEventListener('click', handleClickId);
   }
 }
 btn.addEventListener('click', searchInfo);
-
 
 //# sourceMappingURL=main.js.map
