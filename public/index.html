@@ -9,19 +9,32 @@
     <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 
-<body>
-    <h1 class="h1__title">Buscador de series</h1>
-    <main class="main">
-        <form>
-            <input class="js-input-search" type="text" placeholder="¿Qué serie quieres buscar?" name="input">
-            <input class="js-btn" type="submit" value="Buscar">
-        </form>
-        <p class="js-msg-error"></p>
-        <section class="series__container js-container"></section>
+<body class="main__container">
+    <header class="main__series">
+        <h1 class="main__title">Buscador de series</h1>
 
-        <h2 class="h2__title">Listado de favoritas</h2>
-        <section class="fav__container js-favorites"></section>
-    </main>
+        <form>
+            <input class="input js-input-search" type="text" placeholder="¿Qué serie quieres buscar?" name="input">
+            <div class="btn__container">
+                <input class="btn__input js-btn" type="submit" value="Buscar">
+            </div>
+        </form>
+        <p class="msg__error js-msg-error"></p>
+    </header>
+    <div class="position__container">
+        <div class="flex__container">
+            <div class="flex__left">
+                <div class="flex__left__text">
+                    <section class="series__container js-container"></section>
+                </div>
+            </div>
+        </div>
+        <div class="fav__list-container">
+            <h2 class="fav__title">Listado de favoritas</h2>
+
+            <section class="fav__container js-favorites"></section>
+        </div>
+    </div>
     <script src="./assets/js/main.js"></script>
 </body>
 

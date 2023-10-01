@@ -14,7 +14,6 @@ const serieLocalStorage = JSON.parse(localStorage.getItem('fav'));
 
 // FUNCIONES
 
-//El fetch tiene que pintar una serie en el HTML
 function searchInfo(event) {
   event.preventDefault();
   const inputText = document.querySelector('.js-input-search').value;
@@ -31,24 +30,9 @@ function searchInfo(event) {
     });
 }
 
-// function saveInfoFromLocalStorage() {
-// }
-
-// function getInfoFromLocalStorage() {
-//   const result = JSON.parse(localStorage.getItem('fav'));
-//   if (result === null) {
-//     return [];
-//   } else {
-//     fav = result;
-//     return fav;
-//   }
-// }
-
-//Función para pintar UNA serie en el HTML, renderSerie
-// USAR DOM EN EL HTML DE ESTA FUNCIÓN
-
 function renderSerie(oneSerie) {
   let html = '';
+  html += `<div class="series__container">`;
   html += `<h2 class="serie__title">${oneSerie.show.name}</h2>`;
   html += `<ul id= ${oneSerie.show.id} class="js-ulElements">`;
   if (oneSerie.show.image) {
@@ -59,42 +43,10 @@ function renderSerie(oneSerie) {
   }
 
   html += `</ul>`;
+  html += `</div>`;
   return html;
 }
-// FUNCIÓN ANTERIOR CON DOM
-// function renderSerie(oneSerie) {
-//   let html = '';
 
-//   const h2Title = document.createElement('h2');
-//   h2Title.classList.add('serie__title');
-//   h2Title.textContent = oneSerie.show.name;
-
-//   const ulElement = document.createElement('ul');
-//   ulElement.id = oneSerie.show.id;
-//   ulElement.classList.add('js-ulElements');
-//   ulElement.appendChild(liElement);
-
-//   const liElement = document.createElement('li');
-//   liElements.classList.add('js-liElements');
-//   liElement.appendChild(imgElement);
-
-//   const imgElement = document.createElement('img');
-//   imgElement.alt = oneSerie.show.name;
-//   imgElement.title = oneSerie.show.name;
-
-//   if (oneSerie.show.image) {
-//     imgElement.src = oneSerie.show.image.original;
-//   } else {
-//     imgElement.src =
-//       'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
-//     imgElement.classList.add('js-liElements-img');
-//   }
-
-//   html.appendChild(h2Title);
-//   html.appendChild(ulElement);
-
-//   return html;
-// }
 
 function renderSerieList(listSeries) {
   seriesContainer.innerHTML = '';
@@ -110,6 +62,7 @@ function renderSeriesFav(favSeries) {
   favorites.innerHTML = '';
   for (const oneSerie of favSeries) {
     favorites.innerHTML += renderSerie(oneSerie);
+    //añadir clase favorite para cambiar color background
   }
 }
 

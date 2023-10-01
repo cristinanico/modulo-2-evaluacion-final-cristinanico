@@ -1,21 +1,82 @@
-.h1__title {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #77dd77;
-  text-align: center;
-  padding: 20px; }
-
-.main {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around; }
-  .main .serie__title {
+.main__container {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  margin-top: 40px; }
+  .main__container .position__container {
+    display: flex;
+    flex-direction: row-reverse; }
+  .main__container .main__series {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+    justify-content: center;
+    align-items: center;
+    align-content: center; }
+  .main__container .main__title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #77dd77;
+    text-align: center;
+    padding: 20px; }
+  .main__container .input {
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #b2e2f2; }
+  .main__container .btn__container {
+    text-align: center; }
+  .main__container .btn__input {
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: auto; }
+  .main__container .card__serie-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
+  .main__container .serie__title {
     font-family: Arial, Helvetica, sans-serif;
     color: #84b6f4; }
+  .main__container .js-liElements {
+    list-style: none; }
+    .main__container .js-liElements img {
+      width: 150px;
+      border-color: #fdfd96;
+      padding: 5px; }
+  .main__container .series__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around; }
+  .main__container .favorite {
+    background-color: #ffda9e;
+    color: white; }
+  .main__container .flex__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 100%; }
+  .main__container .flex__left {
+    min-width: 30vw;
+    height: 100%;
+    margin-left: 20px; }
+  .main__container .flex__left__text {
+    padding-left: 30px;
+    padding-right: 10px;
+    padding-top: 30px; }
+  .main__container .series__container {
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    font-weight: bold; }
 
-img {
-  width: 150px; }
-
-.js-liElements {
-  list-style: none; }
+.fav__list-container {
+  padding: 50px;
+  margin-left: 20px;
+  background-color: #fdfd96; }
+  .fav__list-container .fav__title {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #888a8a; }
 
 /*# sourceMappingURL=main.css.map */
