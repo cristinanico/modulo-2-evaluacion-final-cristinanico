@@ -85,13 +85,13 @@ function handleClickId(event) {
   }
   renderSeriesFav(fav);
 
-  localStorage.setItem('fav', JSON.stringify(fav));
-  if (serieLocalStorage !== null) {
-    series = serieLocalStorage;
-    renderSeriesFav(fav);
-  } else {
-    searchInfo();
-  }
+   localStorage.setItem('fav', JSON.stringify(fav));
+   if (serieLocalStorage !== null) {
+     series = serieLocalStorage;
+     renderSeriesFav(fav);
+   } else {
+     searchInfo();
+   }
 }
 
 // EVENTOS
