@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
 .main__container {
   background-color: white;
   height: 100%;
@@ -84,5 +89,8 @@
   .fav__list-container .fav__title {
     font-family: Arial, Helvetica, sans-serif;
     color: #888a8a; }
+
+.add__to-fav {
+  background-color: red; }
 
 /*# sourceMappingURL=main.css.map */
