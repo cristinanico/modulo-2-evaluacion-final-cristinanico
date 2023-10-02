@@ -10,7 +10,8 @@
   margin-top: 40px; }
   .main__container .position__container {
     display: flex;
-    flex-direction: row-reverse; }
+    flex-direction: row-reverse;
+    left: 0; }
   .main__container .main__series {
     background-color: white;
     display: flex;
@@ -23,7 +24,7 @@
     font-family: Arial, Helvetica, sans-serif;
     color: #77dd77;
     text-align: center;
-    padding: 20px; }
+    padding: 10px; }
   .main__container .input {
     padding: 10px;
     border-radius: 10px;
@@ -56,7 +57,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around; }
+    justify-content: space-around;
+    max-width: 50%;
+    margin: auto; }
   .main__container .favorite {
     background-color: #ffda9e;
     color: white; }
@@ -80,12 +83,15 @@
     font-weight: bold; }
 
 .fav__list-container {
+  display: flex;
+  flex-direction: column;
   padding: 50px;
   margin-left: 20px;
   background-color: #fdfd96;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  border-radius: 15px; }
+  border-radius: 15px;
+  gap: 10px; }
   .fav__list-container .fav__title {
     font-family: Arial, Helvetica, sans-serif;
     color: #ba9df4;
