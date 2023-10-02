@@ -11,7 +11,7 @@ const inputSearch = document.querySelector('.js-input-search');
 let series = [];
 let fav = [];
 
-const serieLocalStorage = JSON.parse(localStorage.getItem('fav')) || []; //coge datos o arrays, porque daba fallo.
+fav = JSON.parse(localStorage.getItem('fav')) || []; //coge datos o arrays, porque daba fallo. fav coge directamente el array de la constante let fav porque ya se generan las series ahí.
 
 // FUNCIONES
 
@@ -28,7 +28,7 @@ function searchInfo(event) {
   fetch(`https://api.tvmaze.com/search/shows?q=${inputText}`)
     .then((response) => {
       if (!response.ok) {
-        throw new Error('No consigo encontrarlo...'); // google, preguntar bien. Creo que le dice al ordena que algo está roto y esto lo para.
+        throw new Error('No consigo encontrarlo...'); // Le dice al ordena que algo está roto y esto lo para.
       }
       return response.json();
     })
@@ -42,25 +42,28 @@ function searchInfo(event) {
     });
 }
 
-function renderSerie(oneSerie) {
+function renderSerie(oneSerie, flag) {
   const imageSrc = oneSerie.show.image
     ? oneSerie.show.image.original
     : 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV';
 
-  return `
-    <div class="card__serie-container">
+  let html = `
+    <div class="card__serie-container js-ulElements" id="${oneSerie.show.id}">
       <h2 class="serie__title">${oneSerie.show.name}</h2>
-      <ul id="${oneSerie.show.id}" class="js-ulElements">
+      <ul>
         <li class="js-liElements">
           <img src="${imageSrc}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" />
         </li>
-      </ul>
-    </div>
-  `;
+      </ul>`;
+  if (flag === 'flagFav') {
+    html += `<span class="remove-x" data-id="${oneSerie.show.id}">X</span>`;
+  }
+  html += `</div>`;
+  return html;
 }
 
 function renderSerieList(listSeries) {
-  const fragment = document.createDocumentFragment(); // busqué en google y me decía que añadiera un fragmento, pero no lo entiendo.
+  const fragment = document.createDocumentFragment(); // Es como un contenedor en blano donde poner las series antes de ponerlas en el contenedor definitivo.
   for (const oneSerie of listSeries) {
     const serieElement = document.createElement('div');
     serieElement.innerHTML = renderSerie(oneSerie);
@@ -74,8 +77,7 @@ function renderSerieList(listSeries) {
 function renderSeriesFav(favSeries) {
   favorites.innerHTML = '';
   for (const oneSerie of favSeries) {
-    favorites.innerHTML += renderSerie(oneSerie);
-    // Va aquí el poner el fondo de diferente color?
+    favorites.innerHTML += renderSerie(oneSerie, 'flagFav');
   }
 }
 
@@ -83,17 +85,24 @@ function renderSeriesFav(favSeries) {
 function handleClickId(event) {
   const idSerieClick = parseInt(event.currentTarget.id);
 
-  const foundSerie = series.find((oneSerie) => oneSerie.show.id === idSerieClick);
+  const foundSerie = series.find(
+    (oneSerie) => oneSerie.show.id === idSerieClick
+  );
 
-  const serieFavIndex = fav.findIndex((oneSerie) => oneSerie.show.id === idSerieClick);
+  const serieFavIndex = fav.findIndex(
+    (oneSerie) => oneSerie.show.id === idSerieClick
+  );
 
   if (serieFavIndex === -1) {
     fav.push(foundSerie);
+    event.currentTarget.classList.add('add__to-fav');
   } else {
     fav.splice(serieFavIndex, 1); //elimina, agrega o sustituye en el array
+    event.currentTarget.classList.remove('add__to-fav');
   }
-  
-  renderSeriesFav(fav);
+
+  renderSeriesFav(fav, 'flagFav');
+  addEventsToXFav();
   localStorage.setItem('fav', JSON.stringify(fav));
 }
 
@@ -102,6 +111,15 @@ function addEventsToSerie() {
   const allSeries = document.querySelectorAll('.js-ulElements');
   for (const oneSerie of allSeries) {
     oneSerie.addEventListener('click', handleClickId);
+   
+  }
+}
+
+//Para escuchar sobre las X
+function addEventsToXFav() {
+  const allSeries = document.querySelectorAll('.remove-x');
+  for (const removeX of allSeries) {
+    removeX.addEventListener('click', handleRemoveFav);
   }
 }
 
@@ -115,7 +133,19 @@ inputSearch.addEventListener('keydown', (event) => {
   }
 });
 
+//Para quitar las series de FAV
+function handleRemoveFav(event) {
+  event.preventDefault();
+  const idToX = parseInt(event.currentTarget.getAttribute(`data-id`));
+  const serieIdex = fav.findIndex((oneSerie) => oneSerie.show.id === idToX);
+  fav.splice(serieIdex, 1);
+  renderSeriesFav(fav);
+  addEventsToXFav();
+  localStorage.setItem('fav', JSON.stringify(fav));
+}
+
 // Cargar las series favoritas almacenadas en localStorage al iniciar la página
-renderSeriesFav(serieLocalStorage);
+renderSeriesFav(fav);
+addEventsToXFav();
 
 //# sourceMappingURL=main.js.map

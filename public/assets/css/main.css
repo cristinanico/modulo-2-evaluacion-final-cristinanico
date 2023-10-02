@@ -45,8 +45,7 @@
     justify-content: space-between;
     align-items: center; }
   .main__container .serie__title {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #84b6f4; }
+    color: #888a8a; }
   .main__container .js-liElements {
     list-style: none; }
     .main__container .js-liElements img {
@@ -85,12 +84,15 @@
   margin-left: 20px;
   background-color: #fdfd96;
   min-width: -moz-fit-content;
-  min-width: fit-content; }
+  min-width: fit-content;
+  border-radius: 15px; }
   .fav__list-container .fav__title {
     font-family: Arial, Helvetica, sans-serif;
-    color: #888a8a; }
+    color: #ba9df4;
+    padding: 10px; }
 
 .add__to-fav {
-  background-color: red; }
+  background-color: #e79eff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
 /*# sourceMappingURL=main.css.map */
