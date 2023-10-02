@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de series</title>
+    <link rel="stylesheet" href="./assets/css/main.css">
+</head>
+
+<body class="main__container">
+    <header class="main__series">
+        <h1 class="main__title">Buscador de series</h1>
+
+        <form>
+            <input class="input js-input-search" type="text" placeholder="¿Qué serie quieres buscar?" name="input">
+            <div class="btn__container">
+                <input class="btn__input js-btn" type="submit" value="Buscar">
+            </div>
+        </form>
+        <p class="msg__error msg__error js-msg-error"></p>
+    </header>
+    <div class="position__container">
+        <div class="flex__container">
+            <div class="flex__left">
+                <div class="flex__left-text">
+                    <section class="series__container js-container"></section>
+                </div>
+            </div>
+        </div>
+        <div class="fav__list-container">
+            <h2 class="fav__title">Listado de favoritas</h2>
+            <section class="fav__container js-favorites"></section>
+        </div>
+    </div>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>
