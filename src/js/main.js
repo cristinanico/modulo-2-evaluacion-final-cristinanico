@@ -50,11 +50,15 @@ function renderSerie(oneSerie, flag) {
   let html = `
     <div class="card__serie-container js-ulElements" id="${oneSerie.show.id}">
       <h2 class="serie__title">${oneSerie.show.name}</h2>
+      <h3 class="serie__language">${oneSerie.show.language}</h3>
       <ul>
         <li class="js-liElements">
           <img src="${imageSrc}" alt="${oneSerie.show.name}" title="${oneSerie.show.name}" />
         </li>
       </ul>`;
+      if (oneSerie.show.language === 'Spanish'){
+        html += `<div>Serie recomendada</div>`;
+      }
   if (flag === 'flagFav') {
     html += `<span class="remove-x" data-id="${oneSerie.show.id}">X</span>`;
   }
@@ -63,7 +67,7 @@ function renderSerie(oneSerie, flag) {
 }
 
 function renderSerieList(listSeries) {
-  const fragment = document.createDocumentFragment(); // Es como un contenedor en blano donde poner las series antes de ponerlas en el contenedor definitivo.
+  const fragment = document.createDocumentFragment(); // Es como un contenedor en blanco donde poner las series antes de ponerlas en el contenedor definitivo.
   for (const oneSerie of listSeries) {
     const serieElement = document.createElement('div');
     serieElement.innerHTML = renderSerie(oneSerie);
@@ -143,6 +147,14 @@ function handleRemoveFav(event) {
   addEventsToXFav();
   localStorage.setItem('fav', JSON.stringify(fav));
 }
+
+const btnLog = document.querySelector('.js-LOG');
+
+btnLog.addEventListener('click', (event) => {
+  event.preventDefault();
+  const favoritos = fav.length;
+  console.log(`Tu número de favitos es ${favoritos}`);
+})
 
 // Cargar las series favoritas almacenadas en localStorage al iniciar la página
 renderSeriesFav(fav);
